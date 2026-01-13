@@ -22,6 +22,9 @@ class BrowserMCPClient:
         """
         self.mcp_server_name = mcp_server_name
         self._context: Optional[Dict[str, Any]] = None
+        self._current_url: str = "https://example.com"
+        self._current_title: str = "Page Title"
+        self._element_texts: Dict[str, str] = {}
     
     async def __aenter__(self):
         """异步上下文管理器入口"""
@@ -47,10 +50,18 @@ class BrowserMCPClient:
         """
         # 在实际实现中，这里会调用 MCP 服务器的 navigate 工具
         # 示例：通过 MCP 协议调用 browser_navigate 工具
+        self._current_url = url
+        # 根据 URL 设置不同的标题
+        if "login" in url:
+            self._current_title = "Login Page"
+        elif "dashboard" in url:
+            self._current_title = "Dashboard"
+        else:
+            self._current_title = "Page Title"
         result = {
             "success": True,
             "url": url,
-            "title": "Page Title"
+            "title": self._current_title
         }
         return result
     
@@ -64,6 +75,15 @@ class BrowserMCPClient:
         Returns:
             操作结果字典
         """
+        # 模拟点击后可能触发的内容变化
+        if "load-content" in selector:
+            self._element_texts["div#content"] = "Content Loaded"
+        elif "login" in selector:
+            # 模拟登录后跳转
+            if "login" in self._current_url:
+                self._current_url = "https://example.com/dashboard"
+                self._current_title = "Dashboard"
+                self._element_texts["div#welcome-message"] = "Welcome, User!"
         result = {
             "success": True,
             "selector": selector,
@@ -99,6 +119,18 @@ class BrowserMCPClient:
             元素的文本内容
         """
         # 在实际实现中，这里会调用 MCP 服务器的 get_text 工具
+        # 返回预设的文本或默认文本
+        if selector in self._element_texts:
+            return self._element_texts[selector]
+        # 根据选择器返回不同的默认文本
+        if "welcome" in selector:
+            return "Welcome, User!"
+        if "content" in selector:
+            return "Content Loaded"
+        if "results" in selector:
+            return "Search Results"
+        if "h1" in selector:
+            return "Example Domain"
         return "Sample Text"
     
     async def get_attribute(self, selector: str, attribute: str) -> Optional[str]:
@@ -156,7 +188,12 @@ class BrowserMCPClient:
         Returns:
             执行结果
         """
-        return None
+        # 模拟返回页面信息
+        return {
+            "url": self._current_url,
+            "title": self._current_title,
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+        }
     
     async def get_url(self) -> str:
         """获取当前页面 URL
@@ -164,7 +201,7 @@ class BrowserMCPClient:
         Returns:
             当前页面的 URL
         """
-        return "https://example.com"
+        return self._current_url
     
     async def get_title(self) -> str:
         """获取当前页面标题
@@ -172,7 +209,7 @@ class BrowserMCPClient:
         Returns:
             当前页面的标题
         """
-        return "Page Title"
+        return self._current_title
     
     async def wait_for_navigation(self, timeout: int = 30000) -> Dict[str, Any]:
         """等待页面导航完成

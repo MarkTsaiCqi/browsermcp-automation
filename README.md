@@ -37,8 +37,21 @@ pip install -r requirements.txt
    确保您的编辑器（如 Cursor）已配置 Browser MCP 服务器。通常配置在编辑器的 MCP 设置中。
 
 4. **运行测试**
+
+**重要**：运行测试前必须激活虚拟环境！
+
 ```bash
+# 方法 1: 手动激活虚拟环境
+source venv/bin/activate  # Linux/Mac
+# 或
+venv\Scripts\activate  # Windows
 pytest tests/ -v
+
+# 方法 2: 使用便捷脚本（推荐）
+./run_tests.sh
+
+# 方法 3: 运行特定测试
+./run_tests.sh tests/test_protago_login.py
 ```
 
 ## 📁 项目结构
