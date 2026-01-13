@@ -4,19 +4,31 @@
 
 ## 🚀 三步开始
 
-### 步骤 1: 安装依赖
+### 步骤 1: 创建并激活虚拟环境
+
+```bash
+# 创建虚拟环境
+python3 -m venv venv
+
+# 激活虚拟环境
+source venv/bin/activate  # Linux/Mac
+# 或
+venv\Scripts\activate  # Windows
+```
+
+### 步骤 2: 安装依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 步骤 2: 运行示例测试
+### 步骤 3: 运行示例测试
 
 ```bash
 pytest tests/test_example.py::TestBasicNavigation::test_navigate_to_website -v
 ```
 
-### 步骤 3: 编写你的第一个测试
+### 步骤 4: 编写你的第一个测试
 
 创建 `tests/test_my_test.py`：
 

@@ -20,15 +20,23 @@
 
 ### 安装步骤
 
-1. **安装 Python 依赖**
+1. **创建虚拟环境（推荐）**
+```bash
+python3 -m venv venv
+source venv/bin/activate  # Linux/Mac
+# 或
+venv\Scripts\activate  # Windows
+```
+
+2. **安装 Python 依赖**
 ```bash
 pip install -r requirements.txt
 ```
 
-2. **配置 MCP 服务器**
+3. **配置 MCP 服务器**
    确保您的编辑器（如 Cursor）已配置 Browser MCP 服务器。通常配置在编辑器的 MCP 设置中。
 
-3. **运行测试**
+4. **运行测试**
 ```bash
 pytest tests/ -v
 ```
