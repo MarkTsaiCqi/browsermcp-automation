@@ -54,3 +54,25 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# 临时测试文件（开发过程中的实验性脚本）
+test_js_click.py
+test_js_click_button.py
+test_login_complete.py
+test_mouse_event.py
+test_precise_click.py
+test_real_browser.py
+test_real_user_interaction.py
+click_login_with_playwright.py
+get_button_info.py
+inspect_button.py
+click_login_button.js
+
+# 临时文档
+QUICK_RUN_LOGIN_TEST.txt
+PROGRESS.md
+
+# 临时截图和测试图片
+*.png
+!screenshots/
+screenshots/*.png
