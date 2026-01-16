@@ -68,6 +68,11 @@ get_button_info.py
 inspect_button.py
 click_login_button.js
 
+# Share Link 测试的临时文件（保留 test_share_link_full.py）
+test_share_link_input_only.py
+test_share_link_simple.py
+test_share_link_conversation.py
+
 # 临时文档
 QUICK_RUN_LOGIN_TEST.txt
 PROGRESS.md
